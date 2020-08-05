@@ -1,7 +1,17 @@
 '''
-あるCSVファイルから特定のカラムを特定の件数取得する
+モジュールのインポート
 '''
 import csv
+import os, tkinter, tkinter.filedialog, tkinter.messagebox
+
+'''
+GUIでファイル選択する
+'''
+
+'''
+あるCSVファイルから特定のカラムを特定の件数取得する
+'''
+
 cnt  = 0 
 col_num = 0 
 col_nm = 'id'
@@ -72,7 +82,7 @@ print(output_list)
 
 '''
 CSVへ出力
-newline無しだと、1行空行が挟まれる
+memo:newline無しだと、1行空行が挟まれる
 '''
 with open('output.csv', 'w',newline="") as f:
     writer = csv.writer(f)

@@ -21,6 +21,7 @@ user_game = user[0][2]
 # driver = webdriver.Chrome(chrome_options=options)
 driver = webdriver.Chrome(executable_path='./driver/chromedriver.exe')
 driver.get('http://sba-netgame.dmm.com/pc/my/login') #対象のURL
+driver.maximize_window() #ウィンドウは最大化しておく
 
 #Xpathで実装
 #chromeのデベロッパーツールのElementを参照し構造を下記のように記述してゆく
