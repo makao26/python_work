@@ -11,3 +11,4 @@ driver.set_page_load_timeout(5)
 driver.set_window_position(0,0)
 #カレントウインドウのサイズを幅:100,高さ:200に設定する
 driver.set_window_size(1000,1000)
+
