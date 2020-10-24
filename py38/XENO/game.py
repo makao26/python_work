@@ -56,18 +56,25 @@ print('deck:{0}'.format(deck))
 
 
 # card test code
-# hero card test
+# hero card test @pass
 # hero = card.Hero(10)
-# hero.show_num() #pass
-# emperor card test
+# hero.show_num()
+# emperor card test @pass
 # emperor = card.Emperor(9)
 # emperor.exe_effect(player_list, deck, cemetery)
 # player_list[1].show_hands()
-# spirit card test
-spirit = card.Spirit(8)
-spirit.exe_effect(player_list[0], player_list)
-player_list[0].show_hands()
-player_list[1].show_hands()
+# spirit card test @pass
+# spirit = card.Spirit(8)
+# spirit.exe_effect(player_list[0], player_list)
+# player_list[0].show_hands()
+# player_list[1].show_hands()
+# sage card test code @pass
+# sage = card.Sage(7)
+# sage.exe_effect(player_list[0])
+# player_list[0].drow_deck_and_add_hands(deck)
+# player_list[0].show_hands()
+
+
 
 
 

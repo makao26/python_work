@@ -70,7 +70,14 @@ class Spirit(Card):
         player.add_hands(enemy_player_card)
         enemy_player.add_hands(player_card)
 
-
+class Sage(Card):
+    def show_effect(self):
+        print('effect name: Choice')
+        print('In the next turn, instead of drawing one from the deck, you can draw three and choose one of them. Return the remaining 2 cards to the deck')
+    
+    def exe_effect(self, player):
+        player.set_is_choice_drow()
+    
 
 
 

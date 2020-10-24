@@ -1,3 +1,5 @@
+import random
+
 class Player:
     # hands = [] statis val
     def __init__(self,name,card):
@@ -6,6 +8,7 @@ class Player:
         self.hands.append(card)
         self.is_effect = True
         self.is_turn = False
+        self.is_choice_drow = False
     
     def add_hands(self,card):
         self.hands.append(card)
@@ -21,6 +24,29 @@ class Player:
         print('hands:{0}'.format(self.hands))
         return choice
     
+    def drow_deck_and_add_hands(self, deck):
+        if(self.is_choice_drow):
+            self.choice_card_1_from_3(deck)
+        else:
+            new_hands = deck[-1]
+            deck.pop()
+            self.add_hands(new_hands)
+    
+    def choice_card_1_from_3(self, deck):
+        candidate_cards = []
+        for i in range(3):
+            top_deck = deck[-1]
+            deck.pop()
+            candidate_cards.append(top_deck)
+        
+        print('candidate cards: {0}'.format(candidate_cards))
+        choice = int(input('input candidate cards num: '))
+        self.add_hands(choice)
+        candidate_cards.remove(choice)
+        for candidate_card in candidate_cards:
+            deck.append(candidate_card)
+        random.shuffle(deck)
+    
     def show_hands(self):
         print('hands:{0}'.format(self.hands))
 
@@ -32,3 +58,6 @@ class Player:
     
     def get_hands(self):
         return self.hands
+
+    def set_is_choice_drow(self):
+        self.is_choice_drow = True
