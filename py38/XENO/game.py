@@ -4,6 +4,8 @@ import card
 
 def shuffle(deck):
     random.shuffle(deck)
+def show_cemetery(cemetery):
+    print('cemetery: {0}'.format(cemetery))
 
 deck = [1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8,9,10]
 print(deck)
@@ -54,13 +56,18 @@ print('deck:{0}'.format(deck))
 
 
 # card test code
-hero = card.Hero(10)
-hero.show_num() #pass
-
-emperor = card.Emperor(9)
-emperor.exe_effect(player_list, deck, cemetery)
+# hero card test
+# hero = card.Hero(10)
+# hero.show_num() #pass
+# emperor card test
+# emperor = card.Emperor(9)
+# emperor.exe_effect(player_list, deck, cemetery)
+# player_list[1].show_hands()
+# spirit card test
+spirit = card.Spirit(8)
+spirit.exe_effect(player_list[0], player_list)
+player_list[0].show_hands()
 player_list[1].show_hands()
-
 
 
 

@@ -41,7 +41,7 @@ class Emperor(Card):
     
     def drow_card(self, player, deck):
         p_new_hands = deck[-1]
-        player.drow_card(p_new_hands)
+        player.add_hands(p_new_hands)
         deck.pop()
     
     def discard_hand_choice(self, player, cemetery):
@@ -55,7 +55,24 @@ class Spirit(Card):
         print('effect name: Exchange')
         print('Exchange the hand of the nominated opponent with the hand you have')
     
-    def exe_effect(self):
+    def exe_effect(self, player, player_list):
+        self.show_enmy_name(player_list)
+        player_index = self.choice_enemy(player_list)
+        self.exchange_hands(player, player_list[player_index])
+    
+    def exchange_hands(self, player, enemy_player):
+        player_hands = player.get_hands()
+        player_card = player_hands[0]
+        player.discard_card(player_card)
+        enemy_player_hands = enemy_player.get_hands()
+        enemy_player_card = enemy_player_hands[0]
+        enemy_player.discard_card(enemy_player_card)
+        player.add_hands(enemy_player_card)
+        enemy_player.add_hands(player_card)
+
+
+
+
 
     
 

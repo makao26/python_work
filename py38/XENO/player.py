@@ -7,7 +7,7 @@ class Player:
         self.is_effect = True
         self.is_turn = False
     
-    def drow_card(self,card):
+    def add_hands(self,card):
         self.hands.append(card)
     
     def discard_card(self,card):
@@ -29,3 +29,6 @@ class Player:
 
     def get_name(self):
         return self.name
+    
+    def get_hands(self):
+        return self.hands
