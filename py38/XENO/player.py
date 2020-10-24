@@ -10,6 +10,9 @@ class Player:
     def drow_card(self,card):
         self.hands.append(card)
     
+    def discard_card(self,card):
+        self.hands.remove(card)
+    
     def choice_card(self):
         print('hands:{0}'.format(self.hands))
         choice = int(input('input hands: '))
@@ -23,3 +26,6 @@ class Player:
 
     def show_name(self):
         print('player name:{0}'.format(self.name))
+
+    def get_name(self):
+        return self.name

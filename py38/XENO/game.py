@@ -10,6 +10,8 @@ print(deck)
 shuffle(deck)
 print(deck)
 
+cemetery = []
+
 # # init testcode
 # # pass
 # p1_nm = input('input player 1 name:')
@@ -55,6 +57,9 @@ print('deck:{0}'.format(deck))
 hero = card.Hero(10)
 hero.show_num() #pass
 
+emperor = card.Emperor(9)
+emperor.exe_effect(player_list, deck, cemetery)
+player_list[1].show_hands()
 
 
 
