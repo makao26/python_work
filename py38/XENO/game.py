@@ -7,6 +7,7 @@ def shuffle(deck):
 def show_cemetery(cemetery):
     print('cemetery: {0}'.format(cemetery))
 
+
 deck = [1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8,9,10]
 print(deck)
 shuffle(deck)
@@ -32,7 +33,7 @@ cemetery = []
 # deck.pop()
 # print(deck)
 
-# # player choice test code 
+# # player choice test code
 # # pass
 # p1.show_name()
 # choice_card = p1.choice_card()
@@ -73,10 +74,15 @@ print('deck:{0}'.format(deck))
 # sage.exe_effect(player_list[0])
 # player_list[0].drow_deck_and_add_hands(deck)
 # player_list[0].show_hands()
-
-
-
-
-
-
-
+# noble card test @pass
+# noble = card.Noble(6)
+# result = noble.exe_effect(cemetery, player_list[0],player_list[1])
+# print(result)
+# cemetery.append(6)
+# result = noble.exe_effect(cemetery, player_list[0],player_list[1])
+# print(result)
+# grim reaper card test @pass
+grimreaper = card.GrimReaper(5)
+grimreaper.exe_effect(player_list, deck, cemetery)
+player_list[1].show_hands()
+show_cemetery(cemetery)
