@@ -51,10 +51,29 @@ def player_init(play_num,deck):
         deck.pop()
         player_list.append(p)
     return player_list, deck
-player_list , deck = player_init(2,deck)
+player_list , deck = player_init(4,deck)
 print('deck:{0}'.format(deck))
-# get enemy player list test code
+player_num = len(player_list)
+print('player num: {0}'.format(player_num))
+start_player_idx = random.randint(0,player_num-1)
+print('start player idx :{0}'.format(start_player_idx))
+player_list[start_player_idx].set_isturn(True)
+for i in range(start_player_idx-1):
+    player_temp = player_list[0]
+    player_list.pop(0)
+    player_list.append(player_temp)
+for player in player_list:
+    player.show_name()
 
+# turn test code
+def turn_start():
+    pass
+
+def turn_main():
+    pass
+
+def turn_end():
+    pass
 
 # card test code
 # hero card test @pass
@@ -82,7 +101,7 @@ print('deck:{0}'.format(deck))
 # result = noble.exe_effect(cemetery, player_list[0],player_list[1])
 # print(result)
 # grim reaper card test @pass
-grimreaper = card.GrimReaper(5)
-grimreaper.exe_effect(player_list, deck, cemetery)
-player_list[1].show_hands()
-show_cemetery(cemetery)
+# grimreaper = card.GrimReaper(5)
+# grimreaper.exe_effect(player_list, deck, cemetery)
+# player_list[1].show_hands()
+# show_cemetery(cemetery)

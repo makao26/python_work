@@ -50,10 +50,12 @@ class Emperor(Card):
         # player_list[player_index].show_hands()
         self.discard_hand_choice(player_list[player_index], cemetery)
 
-    def discard_hand_choice(self, player, cemetery):
+    def discard_hand_choice(self, player, cemetery, deck):
         player.show_hands()
         card = int(input('input player hands card: '))
         player.discard_card(card)
+        if card == 10:
+            player.reincarnation_init(deck)
         cemetery.append(card)
 
 class Spirit(Card):
@@ -82,7 +84,7 @@ class Sage(Card):
         print('In the next turn, instead of drawing one from the deck, you can draw three and choose one of them. Return the remaining 2 cards to the deck')
 
     def exe_effect(self, player):
-        player.set_is_choice_drow()
+        player.set_is_choice_drow(True)
 
 
 class Noble(Card):
@@ -121,7 +123,7 @@ class GrimReaper(Card):
         self.drow_card(player_list[player_index], deck)
         self.random_discard_hand(player_list[player_index], cemetery)
 
-    def random_discard_hand(self, player, cemetery):
+    def random_discard_hand(self, player, cemetery, defck):
         player_hands = player.get_hands()
         player.show_hands() #dewbug
         idx_list = []
@@ -130,4 +132,10 @@ class GrimReaper(Card):
         print('idx_list: {0}'.format(idx_list))
         hand_index = int(input('input player hands index: '))
         card = player.random_discard_card(hand_index)
+        if card == 10:
+            reincarnation_init(deck)
         cemetery.append(card)
+
+class Maiden(Card):
+    def show_effect(self):
+        pass

@@ -64,11 +64,13 @@ class Player:
     def get_hands(self):
         return self.hands
 
-    def set_is_choice_drow(self):
-        self.is_choice_drow = True
+    def set_is_choice_drow(self, flag):
+        self.is_choice_drow = flag
+
+    def set_isturn(self, flag):
+        self.is_turn = flag
 
     def reincarnation_init(self, deck):
         self.hands.clear()
         new_card = deck[-1]
         self.add_hands(new_card)
-        pass
