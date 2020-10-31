@@ -53,27 +53,36 @@ def player_init(play_num,deck):
     return player_list, deck
 player_list , deck = player_init(4,deck)
 print('deck:{0}'.format(deck))
-player_num = len(player_list)
-print('player num: {0}'.format(player_num))
-start_player_idx = random.randint(0,player_num-1)
-print('start player idx :{0}'.format(start_player_idx))
-player_list[start_player_idx].set_isturn(True)
-for i in range(start_player_idx-1):
-    player_temp = player_list[0]
-    player_list.pop(0)
-    player_list.append(player_temp)
-for player in player_list:
-    player.show_name()
+
+def player_order_decision(player_list):
+    player_num = len(player_list)
+    print('player num: {0}'.format(player_num))
+    start_player_idx = random.randint(0,player_num-1)
+    print('start player idx :{0}'.format(start_player_idx))
+    player_list[start_player_idx].set_isturn(True)
+    for i in range(start_player_idx-1):
+        player_temp = player_list[0]
+        player_list.pop(0)
+        player_list.append(player_temp)
+    for player in player_list:
+        player.show_name()
+
+def get_enemy_player(player_list):
+    enemy_player_list = []
+    for player in player_list:
+        if !player.get_isturn() :
+            enemy_player_list.append(player)
 
 # turn test code
-def turn_start():
-    pass
+def turn_start(player,deck):
+    player.set_isturn(True)
+    player.drow_deck_and_add_hands(deck)
 
 def turn_main():
     pass
 
-def turn_end():
-    pass
+def turn_end(player):
+    player.set_isturn(True)
 
 # card test code
 # hero card test @pass

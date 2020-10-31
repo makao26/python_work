@@ -70,6 +70,12 @@ class Player:
     def set_isturn(self, flag):
         self.is_turn = flag
 
+    def get_isturn(self):
+        return self.is_turn
+
+    def set_is_effect(self, flag):
+        self.is_effect = flag
+
     def reincarnation_init(self, deck):
         self.hands.clear()
         new_card = deck[-1]

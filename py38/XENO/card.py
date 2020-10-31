@@ -138,4 +138,8 @@ class GrimReaper(Card):
 
 class Maiden(Card):
     def show_effect(self):
-        pass
+        print('effect name: Guardian')
+        print('Negate the effect on you until your next turn.')
+
+    def exe_effect(self, player):
+        player.set_is_effect(False)
