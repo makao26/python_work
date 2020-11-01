@@ -18,7 +18,16 @@ class Card():
         player.add_hands(p_new_hands)
         deck.pop()
 
-    def show_enmy_name(self, player_list):
+    def discard_hand_choice(self, player, cemetery, deck, is_emperor):
+        player.show_hands()
+        card = int(input('input player hands card: '))
+        player.discard_card(card)
+        if card == 10 and is_emperor == False:
+            print('debug reincarnation')
+            player.reincarnation_init(deck)
+        cemetery.append(card)
+
+    def show_enemy_name(self, player_list):
         print('show enemy name')
         for idx, player in enumerate(player_list):
             print('{0}: {1}'.format(idx,player.get_name()))
@@ -44,19 +53,19 @@ class Emperor(Card):
         print('Have the nominated opponent draw one card from the deck and reveal both cards in their hand. And specify one of them and let it be thrown away')
 
     def exe_effect(self,player_list, deck, cemetery):
-        self.show_enmy_name(player_list)
+        self.show_enemy_name(player_list)
         player_index = self.choice_enemy(player_list)
         self.drow_card(player_list[player_index], deck)
         # player_list[player_index].show_hands()
-        self.discard_hand_choice(player_list[player_index], cemetery)
+        self.discard_hand_choice(player_list[player_index], cemetery, True)
 
-    def discard_hand_choice(self, player, cemetery, deck):
-        player.show_hands()
-        card = int(input('input player hands card: '))
-        player.discard_card(card)
-        if card == 10:
-            player.reincarnation_init(deck)
-        cemetery.append(card)
+    # def discard_hand_choice(self, player, cemetery, deck):
+    #     player.show_hands()
+    #     card = int(input('input player hands card: '))
+    #     player.discard_card(card)
+    #     if card == 10:
+    #         player.reincarnation_init(deck)
+    #     cemetery.append(card)
 
 class Spirit(Card):
     def show_effect(self):
@@ -64,7 +73,7 @@ class Spirit(Card):
         print('Exchange the hand of the nominated opponent with the hand you have')
 
     def exe_effect(self, player, player_list):
-        self.show_enmy_name(player_list)
+        self.show_enemy_name(player_list)
         player_index = self.choice_enemy(player_list)
         self.exchange_hands(player, player_list[player_index])
 
@@ -110,7 +119,7 @@ class Noble(Card):
             player_list[player_index].show_hands()
             player_list[enemy_player_index].show_hands()
 
-        return drop_player
+        # return drop_player
 
 class GrimReaper(Card):
     def show_effect(self):
@@ -118,7 +127,7 @@ class GrimReaper(Card):
         print('Have the nominated opponent draw one from the deck. Keep the opponent\'s hand that has become two cards private, and specify one card to discard.')
 
     def exe_effect(self, player_list, deck, cemetery):
-        self.show_enmy_name(player_list)
+        self.show_enemy_name(player_list)
         player_index = self.choice_enemy(player_list)
         self.drow_card(player_list[player_index], deck)
         self.random_discard_hand(player_list[player_index], cemetery)
@@ -143,3 +152,41 @@ class Maiden(Card):
 
     def exe_effect(self, player):
         player.set_is_effect(False)
+
+class Diviner(Card):
+    def show_effect(self):
+        print('effect name: Clairvoyance')
+        print('See the hand of the nominated opponent.')
+
+    def exe_effect(self, enemy_player_list):
+        enemy_player_index = self.choice_enemy(enemy_player_list)
+        enemy_player_list[enemy_player_index].show_hands()
+
+class Soldier(Card):
+    def show_effect(self):
+        print('effect name: Investigation')
+        print('If you guess the hand of the nominated opponent, the opponent will drop out.')
+
+    def exe_effect(self, enemy_player_list, player_list):
+        self.show_enemy_name(enemy_player_list)
+        enemy_player_index = self.choice_enemy(enemy_player_list)
+        card = int(input('input player hands card: '))
+        enemy_player_hands = enemy_player_list[enemy_player_index].get_hands()
+        if card == enemy_player_hands[0]:
+            print('debug dell')
+            player_list.pop(enemy_player_index)
+
+class Boy(Card):
+    def show_effect(self):
+        print('effect name: Revolution')
+        print('The first discard card does not activate any effect. When the second card appears in the field, the same effect as the emperor "Public Execution" will be activated.')
+
+    def exe_effect(self, player_list, deck, cemetery):
+        if 1 in cemetery :
+            self.show_enemy_name(player_list)
+            player_index = self.choice_enemy(player_list)
+            self.drow_card(player_list[player_index], deck)
+            # player_list[player_index].show_hands()
+            self.discard_hand_choice(player_list[player_index], cemetery, deck, False)
+        else :
+            pass

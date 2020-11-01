@@ -51,8 +51,8 @@ def player_init(play_num,deck):
         deck.pop()
         player_list.append(p)
     return player_list, deck
-player_list , deck = player_init(4,deck)
-print('deck:{0}'.format(deck))
+# player_list , deck = player_init(4,deck)
+# print('deck:{0}'.format(deck))
 
 def player_order_decision(player_list):
     player_num = len(player_list)
@@ -67,21 +67,26 @@ def player_order_decision(player_list):
     for player in player_list:
         player.show_name()
 
+
 def get_enemy_player(player_list):
     enemy_player_list = []
     for player in player_list:
-        if !player.get_isturn() :
+        if player.get_isturn() == False :
             enemy_player_list.append(player)
+    return enemy_player_list
 
 # turn test code
 def turn_start(player,deck):
+    print('turn start Phase')
     player.set_isturn(True)
     player.drow_deck_and_add_hands(deck)
 
 def turn_main():
+    print('turn main Phase')
     pass
 
 def turn_end(player):
+    print('turn end Phase')
     player.set_isturn(True)
 
 # card test code
@@ -114,3 +119,32 @@ def turn_end(player):
 # grimreaper.exe_effect(player_list, deck, cemetery)
 # player_list[1].show_hands()
 # show_cemetery(cemetery)
+# soldier card test @pass
+# player_list[0].set_isturn(True)
+# enemy_player_list = get_enemy_player(player_list)
+# soldier = card.Soldier(2)
+# soldier.exe_effect(enemy_player_list, player_list)
+# boy card test code
+# cemetery.append(1)
+# player_list[0].set_isturn(True)
+# enemy_player_list = get_enemy_player(player_list)
+# boy = card.Boy(1)
+# boy.exe_effect(enemy_player_list, deck, cemetery)
+# player_list[1].show_hands()
+# Reincarnation test code @pass
+# test_deck = [1,1,2,2,3,3,4,4,5,5,6,7,6,7,8,8,10,9]
+# player_list , deck = player_init(4,test_deck)
+# print('deck:{0}'.format(test_deck))
+# cemetery.append(1)
+# player_list[0].set_isturn(True)
+# enemy_player_list = get_enemy_player(player_list)
+# boy = card.Boy(1)
+# boy.exe_effect(enemy_player_list, test_deck, cemetery)
+# player_list[1].show_hands()
+
+
+while(len(player_list) > 1):
+    for player in player_list:
+        turn_start()
+        turn_main()
+        turn_end()
