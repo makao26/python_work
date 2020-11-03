@@ -51,8 +51,8 @@ def player_init(play_num,deck):
         deck.pop()
         player_list.append(p)
     return player_list, deck
-# player_list , deck = player_init(4,deck)
-# print('deck:{0}'.format(deck))
+player_list , deck = player_init(2,deck)
+print('deck:{0}'.format(deck))
 
 def player_order_decision(player_list):
     player_num = len(player_list)
@@ -81,13 +81,45 @@ def turn_start(player,deck):
     player.set_isturn(True)
     player.drow_deck_and_add_hands(deck)
 
-def turn_main():
+def turn_main(plater_list, deck, cemetery, player_list_idx):
     print('turn main Phase')
-    pass
+    card_num = player.choice_card()
+    use_card(card_num, plater_list, deck, cemetery, player_list_idx)
+
 
 def turn_end(player):
     print('turn end Phase')
     player.set_isturn(True)
+
+def use_card(card_num, plater_list, deck, cemetery, player_list_idx):
+    if card_num == 1:
+        enemy_player_list = get_enemy_player(player_list)
+        boy = card.Boy(1)
+        boy.exe_effect(enemy_player_list, deck, cemetery)
+    elif card_num == 2:
+        enemy_player_list = get_enemy_player(player_list)
+        soldier = card.Soldier(2)
+        soldier.exe_effect(enemy_player_list, player_list)
+    elif card_num == 3:
+        enemy_player_list = get_enemy_player(player_list)
+        diviner = card.Diviner(3)
+        diviner.exe_effect(enemy_player_list)
+    elif card_num == 4:
+        maiden = card.Maiden(4)
+        maiden.exe_effect(player_list[player_list_idx])
+    elif card_num == 5:
+        enemy_player_list = get_enemy_player(player_list)
+        grimreaper = card.GrimReaper(5)
+        grimreaper.exe_effect(enemy_player_list, deck, cemetery)
+    elif card_num == 6:
+        pass
+    elif card_num == 7:
+        pass
+    elif card_num == 8:
+        pass
+    elif card_num == 9:
+        pass
+
 
 # card test code
 # hero card test @pass
@@ -144,7 +176,7 @@ def turn_end(player):
 
 
 while(len(player_list) > 1):
-    for player in player_list:
-        turn_start()
+    for idx, player in enumerate(player_list):
+        turn_start(player, deck)
         turn_main()
-        turn_end()
+        turn_end(player)

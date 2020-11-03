@@ -126,21 +126,21 @@ class GrimReaper(Card):
         print('effect name: Plague')
         print('Have the nominated opponent draw one from the deck. Keep the opponent\'s hand that has become two cards private, and specify one card to discard.')
 
-    def exe_effect(self, player_list, deck, cemetery):
-        self.show_enemy_name(player_list)
-        player_index = self.choice_enemy(player_list)
-        self.drow_card(player_list[player_index], deck)
-        self.random_discard_hand(player_list[player_index], cemetery)
+    def exe_effect(self, enemy_player_list, deck, cemetery):
+        self.show_enemy_name(enemy_player_list)
+        enemy_player_index = self.choice_enemy(enemy_player_list)
+        self.drow_card(enemy_player_list[enemy_player_index], deck)
+        self.random_discard_hand(enemy_player_list[enemy_player_index], cemetery)
 
-    def random_discard_hand(self, player, cemetery, defck):
-        player_hands = player.get_hands()
-        player.show_hands() #dewbug
+    def random_discard_hand(self, enemy_player, cemetery, defck):
+        enemy_player_hands = enemy_player.get_hands()
+        # enemy_player.show_hands() #dewbug
         idx_list = []
-        for i, x in enumerate(player_hands):
+        for i, x in enumerate(enemy_player_hands):
             idx_list.append(i)
         print('idx_list: {0}'.format(idx_list))
         hand_index = int(input('input player hands index: '))
-        card = player.random_discard_card(hand_index)
+        card = enemy_player.random_discard_card(hand_index)
         if card == 10:
             reincarnation_init(deck)
         cemetery.append(card)
