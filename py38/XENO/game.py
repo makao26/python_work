@@ -81,10 +81,10 @@ def turn_start(player,deck):
     player.set_isturn(True)
     player.drow_deck_and_add_hands(deck)
 
-def turn_main(plater_list, deck, cemetery, player_list_idx):
+def turn_main(player_list, deck, cemetery, player_list_idx):
     print('turn main Phase')
-    card_num = player.choice_card()
-    use_card(card_num, plater_list, deck, cemetery, player_list_idx)
+    card_num = player_list[player_list_idx].choice_card()
+    use_card(card_num, player_list, deck, cemetery, player_list_idx)
 
 
 def turn_end(player):
@@ -112,13 +112,20 @@ def use_card(card_num, plater_list, deck, cemetery, player_list_idx):
         grimreaper = card.GrimReaper(5)
         grimreaper.exe_effect(enemy_player_list, deck, cemetery)
     elif card_num == 6:
-        pass
+        enemy_player_list = get_enemy_player(player_list)
+        noble = card.Noble(6)
+        noble.exe_effect(cemetery, enemy_player_list)
     elif card_num == 7:
-        pass
+        sage = card.Sage(7)
+        sage.exe_effect(player_list[player_list_idx])
     elif card_num == 8:
-        pass
+        enemy_player_list = get_enemy_player(player_list)
+        spirit = card.Spirit(8)
+        spirit.exe_effect(player_list[player_list_idx], enemy_player_list)
     elif card_num == 9:
-        pass
+        enemy_player_list = get_enemy_player(player_list)
+        emperor = card.Emperor(9)
+        emperor.exe_effect(enemy_player_list, deck, cemetery)
 
 
 # card test code
@@ -178,5 +185,5 @@ def use_card(card_num, plater_list, deck, cemetery, player_list_idx):
 while(len(player_list) > 1):
     for idx, player in enumerate(player_list):
         turn_start(player, deck)
-        turn_main()
+        turn_main(player_list, deck, cemetery, idx)
         turn_end(player)

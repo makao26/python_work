@@ -101,9 +101,11 @@ class Noble(Card):
         print('effect name: Showdown')
         print('The first one only shows the hand with the nominated opponent. The second card shows the hand with the nominated opponent, and the one with the smaller number drops out.')
 
-    def exe_effect(self, cemetery, player_list, player_index, enemy_player_index):
+    def exe_effect(self, cemetery, player_list):
         # is_drop = False
         # drop_player = 0
+        self.show_enemy_name(player_list)
+        player_index = self.choice_enemy(player_list)
         if 6 in cemetery :
             player_hands = player_list[player_index].get_hands()
             player_card = player_hands[0]
