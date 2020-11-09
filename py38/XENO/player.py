@@ -23,10 +23,37 @@ class Player:
 
     def choice_card(self):
         print('hands:{0}'.format(self.hands))
-        choice = int(input('input hands: '))
-        print('choice card:{0}'.format(choice))
-        self.hands.remove(choice)
-        print('hands:{0}'.format(self.hands))
+
+        if 10 in self.hands:
+            hand_idx_hero = slef.hands.index(10)
+            if hand_idx_hero == 0:
+                return self.hands[1]
+            else:
+                return slef.hands[0]
+
+        count = 0
+        is_rand_choice = False
+        while count >= 10:
+            choice = int(input('input hands: '))
+            count = count + 1
+            if self.check_input(self.hands,choice):
+                print('choice card:{0}'.format(choice))
+                if choice == 10:
+                    print('Hero cards cannot be put into play')
+                else:
+                    self.hands.remove(choice)
+                    print('hands:{0}'.format(self.hands))
+                    break
+            else:
+                print('miss input hands')
+
+            if count >= 10:
+                is_rand_choice = True
+                break
+
+        if is_rand_choice ==  True:
+            hand_idx = random.randrange(len(self.hands))
+            choice = self.hands[hand_idx]
         return choice
 
     def drow_deck_and_add_hands(self, deck):
@@ -80,3 +107,6 @@ class Player:
         self.hands.clear()
         new_card = deck[-1]
         self.add_hands(new_card)
+
+    def check_input(self, candidate, input):
+        return input in candidate

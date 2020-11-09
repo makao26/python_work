@@ -112,7 +112,7 @@ def use_card(card_num, plater_list, deck, cemetery, player_list_idx):
         grimreaper = card.GrimReaper(5)
         grimreaper.exe_effect(enemy_player_list, deck, cemetery)
     elif card_num == 6:
-        enemy_player_list = get_enemy_player(player_list)
+        enemy_player_list = get_enemy_player(player_list, player_list_idx)
         noble = card.Noble(6)
         noble.exe_effect(cemetery, enemy_player_list)
     elif card_num == 7:
@@ -180,10 +180,18 @@ def use_card(card_num, plater_list, deck, cemetery, player_list_idx):
 # boy = card.Boy(1)
 # boy.exe_effect(enemy_player_list, test_deck, cemetery)
 # player_list[1].show_hands()
+# noble test 02 code @pass
+# noble = card.Noble(6)
+# noble.exe_effect(cemetery, player_list, 0)
+# show_cemetery(cemetery)
+# cemetery.append(6)
+# show_cemetery(cemetery)
+# noble.exe_effect(cemetery, player_list, 0)
+# noble.show_enemy_name(player_list)
 
 
-while(len(player_list) > 1):
-    for idx, player in enumerate(player_list):
-        turn_start(player, deck)
-        turn_main(player_list, deck, cemetery, idx)
-        turn_end(player)
+# while(len(player_list) > 1):
+#     for idx, player in enumerate(player_list):
+#         turn_start(player, deck)
+#         turn_main(player_list, deck, cemetery, idx)
+#         turn_end(player)
