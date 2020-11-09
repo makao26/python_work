@@ -23,19 +23,17 @@ class Player:
 
     def choice_card(self):
         print('hands:{0}'.format(self.hands))
-
         if 10 in self.hands:
-            hand_idx_hero = slef.hands.index(10)
+            hand_idx_hero = self.hands.index(10)
             if hand_idx_hero == 0:
                 return self.hands[1]
             else:
-                return slef.hands[0]
+                return self.hands[0]
 
         count = 0
-        is_rand_choice = False
-        while count >= 10:
-            choice = int(input('input hands: '))
+        while count < 10:
             count = count + 1
+            choice = int(input('input hands: '))
             if self.check_input(self.hands,choice):
                 print('choice card:{0}'.format(choice))
                 if choice == 10:
@@ -47,13 +45,10 @@ class Player:
             else:
                 print('miss input hands')
 
-            if count >= 10:
-                is_rand_choice = True
-                break
-
-        if is_rand_choice ==  True:
+        if count >=  10:
             hand_idx = random.randrange(len(self.hands))
             choice = self.hands[hand_idx]
+
         return choice
 
     def drow_deck_and_add_hands(self, deck):
@@ -72,7 +67,20 @@ class Player:
             candidate_cards.append(top_deck)
 
         print('candidate cards: {0}'.format(candidate_cards))
-        choice = int(input('input candidate cards num: '))
+        count = 0
+        while count < 10:
+            count = count + 1
+            choice = int(input('input candidate cards num: '))
+            if self.check_input(candidate_cards, choice):
+                print('choice card:{0}'.format(choice))
+                break
+            else:
+                print('miss input candidate cards')
+
+        if count >=  10:
+            hand_idx = random.randrange(len(candidate_cards))
+            choice = candidate_cards[hand_idx]
+
         self.add_hands(choice)
         candidate_cards.remove(choice)
         for candidate_card in candidate_cards:

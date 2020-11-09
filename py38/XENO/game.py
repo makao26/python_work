@@ -7,11 +7,10 @@ def shuffle(deck):
 def show_cemetery(cemetery):
     print('cemetery: {0}'.format(cemetery))
 
-
-deck = [1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8,9,10]
-print(deck)
-shuffle(deck)
-print(deck)
+# deck = [1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8,9,10]
+# print(deck)
+# shuffle(deck)
+# print(deck)
 
 cemetery = []
 
@@ -51,8 +50,8 @@ def player_init(play_num,deck):
         deck.pop()
         player_list.append(p)
     return player_list, deck
-player_list , deck = player_init(2,deck)
-print('deck:{0}'.format(deck))
+# player_list , deck = player_init(2,deck)
+# print('deck:{0}'.format(deck))
 
 def player_order_decision(player_list):
     player_num = len(player_list)
@@ -127,7 +126,16 @@ def use_card(card_num, plater_list, deck, cemetery, player_list_idx):
         emperor = card.Emperor(9)
         emperor.exe_effect(enemy_player_list, deck, cemetery)
 
+#############################################
+# game exe code
+# while(len(player_list) > 1):
+#     for idx, player in enumerate(player_list):
+#         turn_start(player, deck)
+#         turn_main(player_list, deck, cemetery, idx)
+#         turn_end(player)
 
+
+#############################################
 # card test code
 # hero card test @pass
 # hero = card.Hero(10)
@@ -189,9 +197,26 @@ def use_card(card_num, plater_list, deck, cemetery, player_list_idx):
 # noble.exe_effect(cemetery, player_list, 0)
 # noble.show_enemy_name(player_list)
 
-
-# while(len(player_list) > 1):
-#     for idx, player in enumerate(player_list):
-#         turn_start(player, deck)
-#         turn_main(player_list, deck, cemetery, idx)
-#         turn_end(player)
+############################################
+# player test code
+# choice_card test code @pass
+# test_deck = [1,2,3,4,5,6,7,8,9,10]
+# player_list , deck = player_init(2,test_deck)
+# print('deck:{0}'.format(test_deck))
+# player_list[0].drow_deck_and_add_hands(test_deck)
+# player_list[0].show_hands()
+# card = player_list[0].choice_card()
+# print('choice card:{0}'.format(card))
+# test_deck = [1,2,3,4,5,6,7,8,9]
+# player_list , deck = player_init(2,test_deck)
+# print('deck:{0}'.format(test_deck))
+# player_list[0].drow_deck_and_add_hands(test_deck)
+# player_list[0].show_hands()
+# card = player_list[0].choice_card()
+# print('choice card:{0}'.format(card))
+# choice_card_1_from_3 test code
+# test_deck = [1,2,3,4,5,6,7,8,9,10]
+# player_list , deck = player_init(2,test_deck)
+# print('deck:{0}'.format(test_deck))
+# player_list[0].choice_card_1_from_3(test_deck)
+# player_list[0].show_hands()
