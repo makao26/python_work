@@ -43,6 +43,10 @@ class Card():
         else:
             player_list[enemy_player_index].reincarnation_init(deck)
 
+    def move_cemetery(self, player, cemetery):
+        player.discard_card(self.num)
+        cemetery.append(self.num)
+
 
 class Hero(Card):
     pass
@@ -57,7 +61,7 @@ class Emperor(Card):
         player_index = self.choice_enemy(player_list)
         self.drow_card(player_list[player_index], deck)
         # player_list[player_index].show_hands()
-        self.discard_hand_choice(player_list[player_index], cemetery, True)
+        self.discard_hand_choice(player_list[player_index], cemetery, deck, True)
 
     # def discard_hand_choice(self, player, cemetery, deck):
     #     player.show_hands()
@@ -77,7 +81,7 @@ class Spirit(Card):
         player_index = self.choice_enemy(player_list)
         self.exchange_hands(player, player_list[player_index])
 
-    def exchange_hands(self, player, enemy_player):
+    def exchange_hands(self, player, enemy_player, cemetery):
         player_hands = player.get_hands()
         player_card = player_hands[0]
         player.discard_card(player_card)
@@ -86,6 +90,7 @@ class Spirit(Card):
         enemy_player.discard_card(enemy_player_card)
         player.add_hands(enemy_player_card)
         enemy_player.add_hands(player_card)
+        self.move_cemetery(player, cemetery)
 
 class Sage(Card):
     def show_effect(self):
@@ -132,9 +137,9 @@ class GrimReaper(Card):
         self.show_enemy_name(enemy_player_list)
         enemy_player_index = self.choice_enemy(enemy_player_list)
         self.drow_card(enemy_player_list[enemy_player_index], deck)
-        self.random_discard_hand(enemy_player_list[enemy_player_index], cemetery)
+        self.random_discard_hand(enemy_player_list[enemy_player_index], cemetery, deck)
 
-    def random_discard_hand(self, enemy_player, cemetery, defck):
+    def random_discard_hand(self, enemy_player, cemetery, deck):
         enemy_player_hands = enemy_player.get_hands()
         # enemy_player.show_hands() #dewbug
         idx_list = []
@@ -144,7 +149,7 @@ class GrimReaper(Card):
         hand_index = int(input('input player hands index: '))
         card = enemy_player.random_discard_card(hand_index)
         if card == 10:
-            reincarnation_init(deck)
+            enemy_player.reincarnation_init(deck)
         cemetery.append(card)
 
 class Maiden(Card):
@@ -161,6 +166,7 @@ class Diviner(Card):
         print('See the hand of the nominated opponent.')
 
     def exe_effect(self, enemy_player_list):
+        self.show_enemy_name(enemy_player_list)
         enemy_player_index = self.choice_enemy(enemy_player_list)
         enemy_player_list[enemy_player_index].show_hands()
 

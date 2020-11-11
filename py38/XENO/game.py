@@ -7,7 +7,7 @@ def shuffle(deck):
 def show_cemetery(cemetery):
     print('cemetery: {0}'.format(cemetery))
 
-# deck = [1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8,9,10]
+deck = [1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8,9,10]
 # print(deck)
 # shuffle(deck)
 # print(deck)
@@ -50,8 +50,7 @@ def player_init(play_num,deck):
         deck.pop()
         player_list.append(p)
     return player_list, deck
-# player_list , deck = player_init(2,deck)
-# print('deck:{0}'.format(deck))
+
 
 def player_order_decision(player_list):
     player_num = len(player_list)
@@ -88,7 +87,7 @@ def turn_main(player_list, deck, cemetery, player_list_idx):
 
 def turn_end(player):
     print('turn end Phase')
-    player.set_isturn(True)
+    player.set_isturn(False)
 
 def use_card(card_num, plater_list, deck, cemetery, player_list_idx):
     if card_num == 1:
@@ -111,7 +110,7 @@ def use_card(card_num, plater_list, deck, cemetery, player_list_idx):
         grimreaper = card.GrimReaper(5)
         grimreaper.exe_effect(enemy_player_list, deck, cemetery)
     elif card_num == 6:
-        enemy_player_list = get_enemy_player(player_list, player_list_idx)
+        enemy_player_list = get_enemy_player(cemetery, player_list, player_list_idx)
         noble = card.Noble(6)
         noble.exe_effect(cemetery, enemy_player_list)
     elif card_num == 7:
@@ -120,7 +119,7 @@ def use_card(card_num, plater_list, deck, cemetery, player_list_idx):
     elif card_num == 8:
         enemy_player_list = get_enemy_player(player_list)
         spirit = card.Spirit(8)
-        spirit.exe_effect(player_list[player_list_idx], enemy_player_list)
+        spirit.exe_effect(player_list[player_list_idx], enemy_player_list, cemetery)
     elif card_num == 9:
         enemy_player_list = get_enemy_player(player_list)
         emperor = card.Emperor(9)
@@ -128,11 +127,19 @@ def use_card(card_num, plater_list, deck, cemetery, player_list_idx):
 
 #############################################
 # game exe code
-# while(len(player_list) > 1):
-#     for idx, player in enumerate(player_list):
-#         turn_start(player, deck)
-#         turn_main(player_list, deck, cemetery, idx)
-#         turn_end(player)
+deck = [1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8,9,10]
+print(deck)
+shuffle(deck)
+print(deck)
+player_list , deck = player_init(2,deck)
+print('deck:{0}'.format(deck))
+
+while(len(player_list) > 1):
+    for idx, player in enumerate(player_list):
+        turn_start(player, deck)
+        turn_main(player_list, deck, cemetery, idx)
+        turn_end(player)
+        print('turn end')
 
 
 #############################################
@@ -196,6 +203,13 @@ def use_card(card_num, plater_list, deck, cemetery, player_list_idx):
 # show_cemetery(cemetery)
 # noble.exe_effect(cemetery, player_list, 0)
 # noble.show_enemy_name(player_list)
+# GrimReaper test 02 code @pass
+# test_deck = [1,2,3,4,5,6,7,8,9,10]
+# player_list , deck = player_init(2,deck)
+# player_list[0].set_isturn(True)
+# enemy_player_list = get_enemy_player(player_list)
+# grimReaper = card.GrimReaper(5)
+# grimReaper.exe_effect(enemy_player_list, test_deck, cemetery)
 
 ############################################
 # player test code

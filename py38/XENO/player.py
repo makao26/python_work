@@ -52,7 +52,7 @@ class Player:
         return choice
 
     def drow_deck_and_add_hands(self, deck):
-        if(self.is_choice_drow):
+        if(self.is_choice_drow == True):
             self.choice_card_1_from_3(deck)
         else:
             new_hands = deck[-1]
