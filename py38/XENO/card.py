@@ -76,10 +76,10 @@ class Spirit(Card):
         print('effect name: Exchange')
         print('Exchange the hand of the nominated opponent with the hand you have')
 
-    def exe_effect(self, player, player_list):
-        self.show_enemy_name(player_list)
-        player_index = self.choice_enemy(player_list)
-        self.exchange_hands(player, player_list[player_index])
+    def exe_effect(self, player, enemy_player_list , cemetery):
+        self.show_enemy_name(enemy_player_list)
+        enemy_player_index = self.choice_enemy(enemy_player_list)
+        self.exchange_hands(player, enemy_player_list[enemy_player_index], cemetery)
 
     def exchange_hands(self, player, enemy_player, cemetery):
         player_hands = player.get_hands()
@@ -106,15 +106,14 @@ class Noble(Card):
         print('effect name: Showdown')
         print('The first one only shows the hand with the nominated opponent. The second card shows the hand with the nominated opponent, and the one with the smaller number drops out.')
 
-    def exe_effect(self, cemetery, player_list, player_index):
-        # is_drop = False
-        # drop_player = 0
-        self.show_enemy_name(player_list)
-        enemy_player_index = self.choice_enemy(player_list)
+    def exe_effect(self, cemetery, player_index, enemy_player_list, player_list):
+
+        self.show_enemy_name(enemy_player_list)
+        enemy_player_index = self.choice_enemy(enemy_player_list)
         if 6 in cemetery :
             player_hands = player_list[player_index].get_hands()
             player_card = player_hands[0]
-            enemy_player_hands = player_list[enemy_player_index].get_hands()
+            enemy_player_hands = enemy_player_list[enemy_player_index].get_hands()
             enemy_player_card = enemy_player_hands[0]
             if player_card > enemy_player_card:
                 player_list.pop(enemy_player_index)
@@ -175,7 +174,7 @@ class Soldier(Card):
         print('effect name: Investigation')
         print('If you guess the hand of the nominated opponent, the opponent will drop out.')
 
-    def exe_effect(self, enemy_player_list, player_list):
+    def exe_effect(self, enemy_player_list, player_list, player_index, cemetery):
         self.show_enemy_name(enemy_player_list)
         enemy_player_index = self.choice_enemy(enemy_player_list)
         card = int(input('input player hands card: '))
@@ -183,6 +182,7 @@ class Soldier(Card):
         if card == enemy_player_hands[0]:
             print('debug dell')
             player_list.pop(enemy_player_index)
+        self.move_cemetery(player_list[player_index], cemetery)
 
 class Boy(Card):
     def show_effect(self):

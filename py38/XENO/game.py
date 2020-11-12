@@ -82,12 +82,14 @@ def turn_start(player,deck):
 def turn_main(player_list, deck, cemetery, player_list_idx):
     print('turn main Phase')
     card_num = player_list[player_list_idx].choice_card()
+    print('use card :{0}'.format(card_num))
     use_card(card_num, player_list, deck, cemetery, player_list_idx)
 
 
 def turn_end(player):
     print('turn end Phase')
     player.set_isturn(False)
+    show_cemetery(cemetery)
 
 def use_card(card_num, plater_list, deck, cemetery, player_list_idx):
     if card_num == 1:
@@ -97,7 +99,7 @@ def use_card(card_num, plater_list, deck, cemetery, player_list_idx):
     elif card_num == 2:
         enemy_player_list = get_enemy_player(player_list)
         soldier = card.Soldier(2)
-        soldier.exe_effect(enemy_player_list, player_list)
+        soldier.exe_effect(enemy_player_list, player_list, player_list_idx, cemetery)
     elif card_num == 3:
         enemy_player_list = get_enemy_player(player_list)
         diviner = card.Diviner(3)
@@ -110,9 +112,9 @@ def use_card(card_num, plater_list, deck, cemetery, player_list_idx):
         grimreaper = card.GrimReaper(5)
         grimreaper.exe_effect(enemy_player_list, deck, cemetery)
     elif card_num == 6:
-        enemy_player_list = get_enemy_player(cemetery, player_list, player_list_idx)
+        enemy_player_list = get_enemy_player(player_list)
         noble = card.Noble(6)
-        noble.exe_effect(cemetery, enemy_player_list)
+        noble.exe_effect(cemetery, player_list_idx, enemy_player_list, player_list)
     elif card_num == 7:
         sage = card.Sage(7)
         sage.exe_effect(player_list[player_list_idx])
