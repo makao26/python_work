@@ -212,6 +212,13 @@ while(len(player_list) > 1):
 # enemy_player_list = get_enemy_player(player_list)
 # grimReaper = card.GrimReaper(5)
 # grimReaper.exe_effect(enemy_player_list, test_deck, cemetery)
+#spirit test 02 code
+test_deck = [1,2,3,4,5,6,7,8,9,10]
+player_list , deck = player_init(2,test_deck)
+player_list[0].set_isturn(True)
+enemy_player_list = get_enemy_player(player_list)
+spirit = card.Spirit(8)
+spirit.exe_effect(player_list[0], enemy_player_list, cemetery)
 
 ############################################
 # player test code
