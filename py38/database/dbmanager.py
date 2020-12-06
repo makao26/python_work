@@ -1,8 +1,10 @@
 # MySQL専用 (Postgresql対応も本来必須)
 
 import MySQLdb
+import traceback
+import json
 
-class DbManagert():
+class DbManager():
     def __init__(self):
         self.connection = None
 
@@ -56,23 +58,58 @@ class DbManagert():
     def commit(self):
         self.connection.commit()
     
-    def close(self):
-        self.connection.close()
-
-        
-
-# 基本的な機能はOK 12/5
-dbm = DbManagert()
-params = {'dbms':'mysql', 'host':'localhost', 'user':'root', 'password':'root', 'db':'sql_jissen'}
-connection = dbm.connect(params)
-cursor = dbm.execute("SELECT * FROM Population")
-rows = cursor.fetchall()
-dbm.commit()
-dbm.close()
-print(rows)
-
-
-        
-
+    def rollback(self):
+        self.connection.commit()
     
-        
+    def closeConnect(self):
+        self.connection.rollback()
+
+    def closeCursor(self, cursor):
+        if cursor is None:
+            pass
+        else :
+            cursor.close()
+    
+    def readDbEnv(self):
+        json_open = open('./env.json', 'r')
+        json_load = json.load(json_open)
+        print(json_load)
+        dbenv = json_load['dbenv']
+        print(dbenv)
+        return dbenv   
+
+# 基本的な機能 OK 12/5
+# dbm = DbManagert()
+# params = {'dbms':'mysql', 'host':'localhost', 'user':'root', 'password':'root', 'db':'sql_jissen'}
+# connection = dbm.connect(params)
+# cursor = dbm.execute("SELECT * FROM Population")
+# rows = cursor.fetchall()
+# dbm.commit()
+# dbm.close()
+# print(rows)
+
+# トランザクションサンプル  OK 12/6
+# json 読み取り OK 12/6
+dbm = DbManager()
+# params = {'dbms':'mysql', 'host':'localhost', 'user':'root', 'password':'root', 'db':'sql_jissen'}
+params = dbm.readDbEnv()
+connection = dbm.connect(params)
+rows = None
+cursor = None
+try:
+    print('dsebug01')
+    cursor = dbm.execute("SELECT * FROM Population")
+    rows = cursor.fetchall()
+    # 後処理（正常時）
+    dbm.commit()
+except Exception as e:
+    print('dsebug02')
+     # 後処理（例外時）
+    traceback.print_exc()
+    dbm.rollback()
+finally:
+    print('dsebug03')
+    dbm.closeCursor(cursor)
+    dbm.closeConnect()
+
+print(rows) 
